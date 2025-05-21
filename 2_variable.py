@@ -71,3 +71,7 @@ set_var = {1, 2, 3}
 # 字典 键值对的集合
 print("---------dict---------")
 dict_var = {"a": 1, "b": 2, "c": 3}
+
+# 可变和不可变类型 mutable and immutable
+# 可变类型：list dict set
+# 不可变类型：int float str tuple bool 
