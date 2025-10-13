@@ -52,6 +52,7 @@ float1 = 31415.9
 str2 = "{:*^20,.2f}".format(float1)
 str3 = "{:*^20,.2f}".format(float1)
 str4 = "{:*^20,.2f}".format(float1)
+str5 = f"{float1:*^20,.2f}"
 print(f"str2:{str2}, str3:{str3}, str4:{str4}")
 # 两个名字需要相同
 print(f"{str2=}, {str3=}, {str4=}")
