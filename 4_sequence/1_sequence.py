@@ -1,8 +1,9 @@
 from functools import reduce
+
 # 序列
 # 序列是 Python 中的一种数据类型，成员是有序排列的，可以通过索引访问。
 # 序列的类型有：列表、元组、字符串等
-# 列表
+# 列表: 可变，有序
 my_list = [1, 2, 3, 4, 5]
 print(my_list)
 # 元组
@@ -13,6 +14,14 @@ my_string = "Hello, World!"
 print(my_string)
 
 # 序列的通用操作
+# 索引：sequence[0]
+# 切片: sequence[1:3]
+# 相加: sequence1 + sequence2
+# 乘法: sequence * 3
+# 检查成员: x in sequence
+# 计算长度: len(sequence)
+# 计算最大值、最小值: max(sequence)\min(sequence)
+
 # 访问元素
 print(my_list[0])
 print(my_tuple[0])
@@ -68,24 +77,35 @@ for index, item in enumerate(my_list):
 # zip() 将多个序列组合成一个序列
 my_list2 = [6, 7, 8]
 for item1, item2 in zip(my_list, my_list2):
-    print(item1, item2) 
+    print(item1, item2)
+
+
 # map() 将函数应用于序列中的每个元素
 def square(x):
     return x * x
+
+
 print(list(map(square, my_list)))
+
+
 # filter() 过滤序列中的元素
 def is_even(x):
     return x % 2 == 0
+
+
 print(list(filter(is_even, my_list)))
+
 
 # reduce() 将函数应用于序列中的每个元素，返回一个值
 def add(x, y):
     return x + y
+
+
 print(reduce(add, my_list))
 
 # 删除序列
-sequence_1 = (1,2,3,4,5)
-del sequence_1 # 删除整个元组
+sequence_1 = (1, 2, 3, 4, 5)
+del sequence_1  # 删除整个元组
 
 # 比较运算符
 # == 判断两个序列是否相等
