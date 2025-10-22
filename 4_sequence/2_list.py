@@ -101,3 +101,20 @@ print(f"zipped: {zipped}")
 # 将zip转换成列表
 list8 = list(zipped)
 print(f"list8: {list8}")
+
+# 推导式深入了解
+
+list1 = [1, 2, 3, 4]
+list2 = [4, 5, 6, 7]
+list3 = [(i, j) for i in list1 if i > 2 for j in list2 if j > 5]
+# 执行原理
+# for i in list1:
+#     if i > 2:
+#         for j in list2:
+#             if j > 5:
+
+list4 = [(i, j) for i in list1 for j in list2 if i > 2 and j > 5]
+# 执行原理
+# for i in list1:
+#     for j in list2:
+#         if i > 2 and j >5:

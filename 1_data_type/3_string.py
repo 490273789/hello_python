@@ -1,3 +1,5 @@
+# 字符串是不可变得，不能直接对原字符串进行修改，
+# 字符串是有序的，字符串中每个字符都有对应的下标（索引），可以通过索引获取字符以及进行切片操作
 # 字符串
 str_var = "Hello, World!"
 # 单引号、双引号、三引号、str()都可以
@@ -62,17 +64,26 @@ print("str_var11:", str_var11)  # Hello, World!
 # 字符串长度，从0开始可以省略0，末尾默认是-1
 str_var12 = len(str_var)  # 13
 print("str_var12:", str_var12)  # 13
+
+# 原始字符串
+str1 = "hello\t\t\tword"
+print(f"str1: {str1}")
+str2 = r"hello\t\t\tword"
+
+print(f"str2: {str2}")
 # 字符串大小
 print("str_var max min:", max(str_var11), min("wang"))
 # 字符串查找
-str_var13 = str_var.find("World")  # 7
+str_var13 = str_var.find("World")  # sub[, start, end]
 print("str_var13:", str_var13)  # 7
 # 字符串替换
 str_var14 = str_var.replace("World", "Python")  # Hello, Python!
 print("str_var14:", str_var14)  # Hello, Python!
 # 字符串分割
-str_var15 = str_var.split(",")  # ['Hello', ' World!']
-print("str_var15:", str_var15)  # ['Hello', ' World!']
+list_var15 = str_var.split(",")  # 第二个参数 maxSplit 最多切割几次
+print("str_var15:", list_var15)  # ['Hello', ' World!']
+str_var15 = ",".join(list_var15)
+print(f"str_var15: {str_var15}")
 
 # 字符串反转
 str_var16 = str_var[::-1]  # !dlroW ,olleH
