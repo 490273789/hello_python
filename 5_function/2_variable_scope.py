@@ -26,6 +26,7 @@ num1 = 10
 
 
 def f():
+    # num1 += 1  # 报错，会讲num1当作局部变量处理
     num1 = 20  # 会创建一个和全局num1同名的局部变量，不会改变全局变量
     print(num1)
 
@@ -37,6 +38,7 @@ print(num1)  # 10
 num1 = 10
 
 
+# global
 def f():
     global num1  # 声明 num1 为全局变量，如果是可变的数据类型，改变它的值会改变全局变量，不需要声明global
     num1 = 20  # 会改变全局变量 num1
@@ -46,3 +48,18 @@ def f():
 f()  # 20
 
 print(num1)  # 20
+
+
+# nonlocal
+def a():
+    num2 = 10
+
+    def b():
+        nonlocal num2  # 原理同global，作用在嵌套作用域
+        num2 = 20
+        print(num2)
+
+    print(num2)
+
+
+a()
