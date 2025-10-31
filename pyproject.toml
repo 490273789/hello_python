@@ -1,15 +1,10 @@
 [project]
-name = "hello_python"
+name = "hello-python"
 version = "0.1.0"
-description = "Default template for PDM package"
-authors = [
-    {name = "Ethan Wang", email = "ethan.wang1993@outlook.com"},
-]
-dependencies = ["openpyxl>=3.1.5", "pandas>=2.3.3", "xlsxwriter>=3.2.9", "pypdf>=6.1.3"]
-requires-python = "==3.12.*"
+description = "Add your description here"
 readme = "README.md"
-license = {text = "MIT"}
-
-
-[tool.pdm]
-distribution = false
+requires-python = ">=3.12.12"
+dependencies = [
+    "pypdf>=6.1.3",
+    "ruff>=0.14.3",
+]
