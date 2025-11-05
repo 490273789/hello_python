@@ -85,20 +85,8 @@ class Animal:
         else:
             print("Age cannot be negative.")
 
-    # 特殊方法
+    # 私有变量
     def __make_sound(self, sound):
-        """
-        特殊方法（魔法方法）：方法名中有两个特殊的前缀__和后缀__的方法
-        这些方法会在进行特殊操作时，自动被调用
-        __new__(): 对象实例化时第一个调用的方法
-        __init__(): 类的初始化方法
-        __del__(): 对象销毁器，定义了当对象被垃圾回收时的行为，使用delXXX时不会主动带调用__del__,除非此时引用计数==0
-        __str__(): 定义了对类的实例调用str是的行为
-        __repr__(): 定义对类的实例调用repr()时的行为。str和repr最主要的差别是在于目标用户。
-            repr()的作用是产生机器可读的输出
-            str() 则产生人类可读的输出
-        __getattribute__(): 属性访问拦截器，定义了属性被访问前的操作
-        """
         print(f"{self._name} says: {sound}")
 
     # 类方法
