@@ -1,6 +1,8 @@
 # exception handling
 import random
 
+# 在运行期检测到的错误成为异常
+
 # 常见的错误类型
 # 1. SyntaxError: 语法错误
 # 2. NameError: 访问一个不存在的变量抛出异常
@@ -27,6 +29,8 @@ except ValueError:
     print("输入无效，请输入一个数字。")
 except ZeroDivisionError as e:
     print("除数不能为零:", e)
+except (FileNotFoundError, OverflowError, IndentationError) as e:
+    print(e)
 except Exception as e:
     print("发生了一个异常：", e)
 else:

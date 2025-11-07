@@ -1,4 +1,5 @@
-# raise 的使用
+# raise - 抛出异常
+# 格式：raise 异常类型
 try:
     x = int(input("请输入一个数字："))
     if x < 0:
