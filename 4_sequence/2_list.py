@@ -24,9 +24,7 @@ print(len(my_list))
 # 列表的添加
 my_list.append(6)
 print(my_list)
-# 列表的删除
-my_list.remove(2)
-print(my_list)
+
 # 列表的修改
 my_list[0] = 10
 print(my_list)
@@ -46,12 +44,7 @@ print(my_list)
 # insert() 在指定位置插入元素
 my_list.insert(0, 0)
 print(my_list)
-# remove() 删除第一次出现的指定元素
-my_list.remove(2)
-print(my_list)
-# pop() 删除指定位置的元素
-my_list.pop(0)
-print(my_list)
+
 
 # index() 返回指定元素的索引
 my_list = [1, 2, 3, 4, 5]
@@ -66,9 +59,16 @@ print(sum(my_list))
 my_list.clear()
 print(my_list)
 
+# remove() 根据内容删除元素，删除第一次出现的指定元素
+my_list.remove(2)  # 不返回值
+print(my_list)
+# pop() 根据索引删除元素
+my_list.pop(0)  # 返回呗弹出的元素
+print(my_list)
+
 # 删除list
 del_test = ["q", "w", "e"]
-# 根据index删除其中某个元素
+# 根据索引删除元素
 del del_test[0]
 print("del_list:", del_test)
 

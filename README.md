@@ -1,0 +1,1 @@
+pip freeze > pypackage-langchain.txt
