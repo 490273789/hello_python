@@ -1,0 +1,17 @@
+{
+    // 保存时自动格式化
+    "editor.formatOnSave": true,
+    // Python 相关配置
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit",
+            "source.fixAll": "explicit"
+        }
+    },
+    // Ruff 配置
+    "ruff.enable": true,
+    "ruff.organizeImports": true,
+    "ruff.fixAll": true
+}
