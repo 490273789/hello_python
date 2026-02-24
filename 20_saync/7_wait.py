@@ -1,5 +1,6 @@
-# 可以用于等待多个task或Future对象，并且可以指定在什么情况下才会返回，默认是ALL_COMPLETED，
-# 注意，这个函数不会触发TimeoutError，而是将执行完的和超市的通过远足的形式返回
+# 可以用于等待多个task或Future对象
+# 可以指定在什么情况下才会返回，默认是ALL_COMPLETED，return_when = asyncio.ALL_COMPLETED
+# 注意，这个函数不会触发TimeoutError，而是将执行完的和超时的通过元组的形式返回
 
 import asyncio
 
@@ -9,7 +10,11 @@ async def greet(name, s):
     return name
 
 
-# 运行单个协程或者任务
+# 运行task或者Future对象，不能是写成
+# 如果没有指定timeout，永远不会过时
+# return_when 除了默认的ALL_coMPLETED 外，还有以下可选值:ALL_COMPLETED:等所有任务都执行完成后再返回。
+# FIRST_EXCEPTION:有任何任务发生异常后就立即返回，即使没有超时也会返回。
+# FIRST_COMPLETED:第一个任务执行完后就立即返回。
 async def main():
     done_tasks, pending_tasks = await asyncio.wait(
         [
