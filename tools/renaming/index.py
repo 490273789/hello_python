@@ -19,8 +19,8 @@ import os
 import re
 from pathlib import Path
 
-
 # ─── 工具函数 ─────────────────────────────────────────────
+
 
 def get_files(directory: str, extensions: list[str] | None = None) -> list[Path]:
     """获取目录下的文件列表（不含子目录文件），可按扩展名筛选。"""
@@ -85,6 +85,7 @@ def execute_rename(rename_pairs: list[tuple[Path, Path]]) -> None:
 
 
 # ─── 重命名规则 ───────────────────────────────────────────
+
 
 def rule_add_prefix_suffix(files: list[Path]) -> list[tuple[Path, Path]]:
     """添加前缀或后缀。"""
@@ -217,6 +218,7 @@ def rule_replace_first_n(files: list[Path]) -> list[tuple[Path, Path]]:
 
 
 # ─── 扩展名筛选 ───────────────────────────────────────────
+
 
 def ask_extension_filter() -> list[str] | None:
     """询问是否按扩展名筛选。"""

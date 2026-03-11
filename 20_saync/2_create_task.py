@@ -1,6 +1,7 @@
 import asyncio
 
-# 协程 
+
+# 协程
 async def async_task(name, delay):
     print(f"{name} 开始点餐...")
     # await 是关键！
@@ -22,5 +23,15 @@ async def main():
     await task1
     await task2
     print("餐厅打烊")
-    
-asyncio.run(main())
+
+
+if __name__ == "__main__":
+    # main()： 创建一个协程，并不是直接运行main函数
+    asyncio.run(main())  # 如果没有时间循环会创建一个时间循环，如果有则放入事件循环
+
+# 事件循环
+# 有一个协程队列，存储所有需要执行的协程
+# queue = [cor1, cor2,...]
+# while True:
+#     cor = queue.pop()
+#     result = await cor
