@@ -1,5 +1,4 @@
 # while 循环
-# while 循环的基本语法
 
 num = 0
 while num < 5:
@@ -15,7 +14,6 @@ else:
     print("循环结束")
 
 # while 循环的break语句, 执行break的时候就不会执行else了
-
 num = 0
 while num < 5:
     if num == 3:

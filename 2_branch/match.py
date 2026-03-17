@@ -1,6 +1,6 @@
 # 模式匹配 python 3.10以上支持
 # age = 20
-# := python3.8引入的海象运算符
+# := python3.8引入的海象运算符: 用于在表达式中同时完成赋值和返回值
 
 match age := 20:
     case age if age >= 18:
