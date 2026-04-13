@@ -1,5 +1,8 @@
 def main():
     print("Hello from hello-python!")
+    print(f"二 > 十六进制：0b00110001 > {hex(0b00110001)}")
+    print(f"二 > 十进制：0b00110001 > {int('0b00110001', 2)}")
+    print(f"十 > 十六进制：49 > {hex(49)}")
 
 
 if __name__ == "__main__":

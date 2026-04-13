@@ -5,14 +5,15 @@ PDF压缩工具
 支持通过调整图像质量和优化来压缩PDF文件大小
 """
 
+import argparse
+import io
 import os
 import sys
-import argparse
 from pathlib import Path
 from typing import Optional, Tuple
+
 import fitz  # PyMuPDF
 from PIL import Image
-import io
 
 
 class PDFCompressor:
@@ -90,38 +91,38 @@ class PDFCompressor:
 
             # 计算图像质量 (compression_level转换为质量参数)
             image_quality = max(10, min(95, compression_level))
+            processed_xrefs = set()
 
             # 处理每一页
             for page_num in range(len(doc)):
                 page = doc.load_page(page_num)
 
-                # 获取页面中的图像
-                image_list = page.get_images()
-
-                for img_index, img in enumerate(image_list):
+                for img in page.get_images(full=True):
+                    xref = img[0]
+                    # 跳过已处理的图像（同一图像可能在多页出现）
+                    if xref in processed_xrefs:
+                        continue
+                    processed_xrefs.add(xref)
                     try:
-                        # 获取图像数据
-                        xref = img[0]
-                        base_image = doc.extract_image(xref)
-                        image_data = base_image["image"]
-
-                        # 压缩图像
-                        compressed_data = self.compress_image(
-                            image_data, quality=image_quality
-                        )
-
-                        # 如果压缩后的图像更小，则替换
-                        if len(compressed_data) < len(image_data):
-                            # 创建新的图像对象
-                            # compressed_image = fitz.Pixmap(compressed_data)
-                            # 替换原图像
-                            doc.update_stream(xref, compressed_data)
+                        # 使用 fitz.Pixmap 处理图像，支持各种色彩空间
+                        pix = fitz.Pixmap(doc, xref)
+                        # CMYK 或其他特殊色彩空间转换为 RGB
+                        if pix.n - pix.alpha > 3:
+                            pix = fitz.Pixmap(fitz.csRGB, pix)
+                        # 移除 alpha 通道（JPEG 不支持透明度）
+                        if pix.alpha:
+                            pix = fitz.Pixmap(pix, 0)
+                        # 压缩为 JPEG
+                        jpeg_bytes = pix.tobytes("jpeg", jpg_quality=image_quality)
+                        # 更新图像流，compress=False 避免对 JPEG 数据再次 Flate 压缩
+                        doc.update_stream(xref, jpeg_bytes, compress=False)
+                        # 同步更新图像字典的编码信息
+                        doc.xref_set_key(xref, "Filter", "/DCTDecode")
+                        doc.xref_set_key(xref, "ColorSpace", "/DeviceRGB")
+                        doc.xref_set_key(xref, "BitsPerComponent", "8")
 
                     except Exception as e:
-                        print(
-                            f"警告: 处理第{page_num + 1}页的图像{img_index + 1}时出错: {e}"
-                        )
-                        continue
+                        print(f"警告: 处理第{page_num + 1}页的图像时出错: {e}")
 
             # 保存压缩后的PDF
             doc.save(output_path, garbage=4, deflate=True, clean=True)
@@ -150,27 +151,23 @@ class PDFCompressor:
             # 计算DPI (compression_level转换为DPI)
             # 100% = 150 DPI, 50% = 100 DPI, 0% = 72 DPI
             dpi = int(72 + (compression_level / 100) * 78)
+            image_quality = max(10, min(95, compression_level))
 
             for page_num in range(len(doc)):
                 page = doc.load_page(page_num)
 
-                # 渲染页面为图像
+                # 渲染页面为像素图
                 mat = fitz.Matrix(dpi / 72, dpi / 72)
                 pix = page.get_pixmap(matrix=mat)
 
-                # 转换为PIL图像并压缩
-                img_data = pix.tobytes("png")
-                compressed_data = self.compress_image(
-                    img_data, quality=compression_level
-                )
+                # 直接用 fitz 输出 JPEG，避免 PNG→JPEG 格式不匹配导致图像丢失
+                jpeg_bytes = pix.tobytes("jpeg", jpg_quality=image_quality)
 
-                # 创建新页面
-                img_doc = fitz.open("png", compressed_data)
+                # 创建新页面并插入压缩后的图像
                 new_page = new_doc.new_page(
                     width=page.rect.width, height=page.rect.height
                 )
-                new_page.show_pdf_page(page.rect, img_doc, 0)
-                img_doc.close()
+                new_page.insert_image(new_page.rect, stream=jpeg_bytes)
 
             # 保存新文档
             new_doc.save(output_path, garbage=4, deflate=True, clean=True)
@@ -186,7 +183,7 @@ class PDFCompressor:
     def compress_pdf(
         self,
         input_path: str,
-        output_path: str = None,
+        output_path: str = None,  # type: ignore
         compression_percent: int = 50,
         method: str = "smart",
     ) -> Tuple[bool, Optional[str]]:

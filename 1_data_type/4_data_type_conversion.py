@@ -49,10 +49,8 @@ bool_var = bool(str_var1)
 print("bool_var:", bool_var)  # False
 # 整数转布尔值
 int_var, int_var1 = 0, 1
-bool_var = bool(int_var)
-print("bool_var:", bool_var)  # False
-bool_var = bool(int_var1)
-print("bool_var:", bool_var)  # True
+print("bool_var:", bool(int_var))  # False
+print("bool_var:", bool(int_var1))  # True
 # 浮点数转布尔值
 float_var, float_var1 = 0.0, 1.0
 bool_var = bool(float_var)

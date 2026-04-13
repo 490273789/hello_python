@@ -100,6 +100,7 @@ print("str_var21:", str_var.swapcase())  # hELLO, wORLD!
 # 字符串去除空格
 str_var22 = "   Hello, World!   "
 print("str_var22:", str_var22.strip())  # Hello, World!
+print("str_var22:", str_var22.lstrip())  # Hello, World!
 # 字符串判断
 print("str_var23:", str_var22.startswith("Hello"))  # True
 print("str_var24:", str_var22.endswith("World!"))  # True

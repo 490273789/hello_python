@@ -1,1 +1,1 @@
-pip freeze > pypackage-langchain.txt
+发现需求 》提出问题 》理解核心概念 》验证答案 》探索不同路径 》协同完善 
