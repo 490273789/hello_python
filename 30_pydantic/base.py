@@ -36,3 +36,18 @@ data_dict = {"id": 3, "name": "橙子", "price": 4.0}
 item3 = Item.model_validate(data_dict)
 print(f"item3: {item3}")
 print(f"type(item3): {type(item3)}")
+
+# Model.model_json_schema()
+model_json_schema = Item.model_json_schema()
+print(model_json_schema)
+print(f"type: {type(model_json_schema)}")
+# {
+#     "properties": {
+#         "id": {"title": "Id", "type": "integer"},
+#         "name": {"title": "Name", "type": "string"},
+#         "price": {"title": "Price", "type": "number"},
+#     },
+#     "required": ["id", "name", "price"],
+#     "title": "Item",
+#     "type": "object",
+# }

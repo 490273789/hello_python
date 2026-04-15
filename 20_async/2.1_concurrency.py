@@ -1,6 +1,6 @@
 import asyncio
 
-from tools import async_timed, greet
+from .tools import async_timed, greet
 
 # 同步运行
 # @async_timed
